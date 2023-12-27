@@ -14,7 +14,6 @@ fn main() -> io::Result<()> {
     let mut current_age = String::new();
     let mut retirement_age = String::new();
     
-
     print!("What is your current age? ");
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut current_age)?;
