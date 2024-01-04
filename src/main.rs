@@ -10,6 +10,21 @@ use chrono::{Datelike, Utc};
 // Process: Years until retirement
 // Output: You have {years_till_retirement} left until you can retire. \n It's {current_year}, so you can retire in {retirement_year}
 
+fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
+    loop {
+        print!("{}", prompt);
+        io::stdout().flush().unwrap();
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("Failed to read input");
+
+        match input.trim().parse() {
+            Ok(value) => break value,
+            Err(_) => println!("Invalid input. Please try again."),
+        }
+    }
+}
+
 fn main() -> io::Result<()> {
     let mut current_age = String::new();
     let mut retirement_age = String::new();
