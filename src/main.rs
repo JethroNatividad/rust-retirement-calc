@@ -25,27 +25,14 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
     }
 }
 
-fn main() -> io::Result<()> {
-    let mut current_age = String::new();
-    let mut retirement_age = String::new();
-    
-    print!("What is your current age? ");
-    io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut current_age)?;
-
-    print!("At what age would you like to retire? ");
-    io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut retirement_age)?;
+fn main() {
+    let current_age: i32 = get_input("What is your current age? ");
+    let retirement_age: i32 = get_input("At what age would you like to retire? ");
 
     let current_year = Utc::now().year();
 
-    let current_age_parsed: i32 = current_age.trim().parse::<i32>().unwrap();
-    let retirement_age_parsed: i32 = retirement_age.trim().parse::<i32>().unwrap();
-
-    let years_till_retirement = retirement_age_parsed - current_age_parsed;
+    let years_till_retirement = retirement_age - current_age;
     let retirement_year = current_year + years_till_retirement;
 
     println!("You have {} years left until you can retire.\nIt's {}, so you can retire in {}.", years_till_retirement, current_year, retirement_year);
-
-    Ok(())
 }
